@@ -1,0 +1,115 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0 auto;
+  padding: 0;
+  background: #D2D2D2;
+  font-size: 14px;
+  font-family: Trebuchet MS, Verdana, Arial, Helvetica, sans-serif;
+}
+.wrapper {
+  border-radius: 5px 5px 0 0;
+  width: 80%;
+  min-width: 900px;
+  margin: 2% auto 4% auto;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 2px 2px 18px #aaa;
+}
+.header {
+  background: #3B3B3B;
+  /* background: #54c2f9; */
+  padding: 20px;
+  cursor: pointer;
+}
+.header-title {
+  display: block;
+  height: 46px;
+  background: url(netpeak_white_bg.png) no-repeat;
+  padding-left: 220px;
+  color: #aaa;
+  padding-top: 10px;
+}
+.content {
+  padding: 20px;
+}
+.footer {
+  padding: 10px 25px;
+  background: #EBEBEB;
+  color: #AFAFAF;
+  font-size: 11px;
+}
+
+/*
+ * Page elements
+ */
+.page-section-heading {
+  margin-bottom: .3em;
+  padding-bottom: .3em;
+  border-bottom: 1px solid #EEE;
+}
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+table.fullwidth {
+  width: 100%;
+}
+table.fullwidth-info {
+  width: 50%;
+}
+table td, table th {
+  padding: .3em;
+  border: 1px solid #aaa;
+
+}
+table th {
+  background: #f1f1f1;
+  text-align: left;
+  border: 1px solid #aaa;
+}
+table thead th {
+  background: #54c2f9;
+  color: #fcfcfc;
+  font-weight: normal;
+  padding: .4em;
+  border: 1px solid #5B7436;
+  text-align: center;
+}
+
+.analysis-wrapper form input,
+.analysis-wrapper form select,
+.analysis-wrapper form button,
+.analysis-wrapper form textarea {
+  padding: 1%;
+}
+.analysis-wrapper form input,
+.analysis-wrapper form select,
+.analysis-wrapper form textarea {
+  border: 1px solid #aaa;
+}
+.analysis-wrapper form input:focus,
+.analysis-wrapper form select:focus,
+.analysis-wrapper form button:focus,
+.analysis-wrapper form textarea:focus {
+  outline: 1px solid #C1DA9D;
+  border: 1px solid #90B557;
+}
+.analysis-wrapper form textarea.analysis-text {
+  width: 98%;
+  height: 20em;
+}
+.scrollable-content {
+  overflow-y: auto;
+  max-height: 260px;
+}
+.scrollable-content-info {
+  overflow-y: auto;
+  max-height: 300px;
+}
+.page-section-content {
+  clear: both;
+  margin-bottom: 1.5em;
+}

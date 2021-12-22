@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="finik_netpeak" />
+        <title>FINIK</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/static/css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="wrapper">
+            <!--Navbar-->
+            <div class="header" onclick="window.location.href='/'">
+                <span class="header-title">
+                  Семантичен анализ
+                </span>
+            </div>
+            <!-- Page content-->
+            <form action="/statistics" method="post">
+                <div class="content">
+                    <h2>Основният текст</h2>
+                    <textarea name="main_text" id="main_text" rows="15" placeholder="Текст" style="width: 100%;"></textarea>
+                    <br><br>
+                    <h2>Текст на конкурента</h2>
+                    <textarea name="comp_text" id="comp_text" rows="15" placeholder="Текст" style="width: 100%;"></textarea>
+                    <br>
+                    <br>
+                    <input type="submit" value="Анализиране" style="width: 15%; height: 3rem;">
+                </div>
+            </form>
+            <!-- FOOTER -->
+            <div class="footer">
+                <p>&copy; <a href="http://netpeak.bg/">Netpeak Bulgaria</a> 2014</p>
+            </div>
+        </div>
+    </body>
+</html>

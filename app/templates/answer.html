@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="utf-8" />
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" /> -->
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>FINIK_answer</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/static/css/styles.css" rel="stylesheet" />
+
+        <style>
+            .info-button {
+                border-radius: 55%; 
+                width: 1.3rem; 
+                opacity: 0.5;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <!--HEADER-->
+            <div class="header" onclick="window.location.href='/'">
+                <span class="header-title">
+                  Семантичен анализ
+                </span>
+            </div>
+            <!-- Page content-->
+            <div class="analysis-wrapper">
+                <div class='main info'>
+                    <h2 class="page-section-heading">Статистика за текста</h2>
+                    <div class="scrollable-content-info page-section-content" >
+                        <table style="width: 40%;">
+                        <colgroup>
+                            <col style="width: 15%; " />
+                            <col style="width: 10%;" />
+                            <col style="width: 10%;" />
+                        </colgroup>
+                        <tr>
+                            <th style="background: #54c2f9;">Критерии</th> 
+                            <th style="background: #54c2f9;">Основен текст</th> 
+                            <th style="background: #54c2f9;">Текст на конкурента</th> 
+                        </tr>
+                        <tr>
+                            <th>Символи:</th> 
+                            <td>{{info['data main text']['count of symbols']}}</td>
+                            <td>{{info['data comp text']['count of symbols']}}</td>
+                        </tr>
+                        <tr>
+                            <th>Символи без пр. знаци:</th>
+                            <td>{{info['data main text']['count of symbols(- empty)']}}</td>
+                            <td>{{info['data comp text']['count of symbols(- empty)']}}</td>
+                        </tr>
+                        <tr>
+                            <th>Думи:</th>
+                            <td>{{info['data main text']['number of words']}}</td>
+                            <td>{{info['data comp text']['number of words']}}</td>
+                        </tr>
+                        <tr>
+                            <th>Неразпознати думи</th>
+                            <td>{{info['data main text']['number of unknown']}}</td>
+                            <td>{{info['data comp text']['number of unknown']}}</td>
+                        </tr>
+                        <tr>
+                            <th>Изречения:</th>
+                            <td>{{info['data main text']['number of sentences']}}</td>
+                            <td>{{info['data comp text']['number of sentences']}}</td>
+                        </tr>
+                        <tr>
+                            <th>Символи в изречение:</th>
+                            <td>{{info['data main text']['symbols in sentences']}}</td>
+                            <td>{{info['data comp text']['symbols in sentences']}}</td>
+                        </tr>
+                        <tr>
+                            <th>Думи в изречение:</th>
+                            <td>{{info['data main text']['words in sentences']}}</td>
+                            <td>{{info['data comp text']['words in sentences']}}</td>
+                        </tr>
+                        <tr>
+                            <th>Абзаци:</th>
+                            <td>{{info['data main text']['number of paragraphs']}}</td>
+                            <td>{{info['data comp text']['number of paragraphs']}}</td>
+                        </tr>
+                        <tr>
+                            <th>Символи в абзац:</th>
+                            <td>{{info['data main text']['symbols in paragraphs']}}</td>
+                            <td>{{info['data comp text']['symbols in paragraphs']}}</td>
+                        </tr>
+                        <tr>
+                            <th>Думи в абзац:</th>
+                            <td>{{info['data main text']['words in paragraphs']}}</td>
+                            <td>{{info['data comp text']['words in paragraphs']}}</td>
+                        </tr>
+                        </table>
+                    </div>
+                
+                    <!-- unique words of competitors' texts [start] -->
+                    <h2 class="page-section-heading">
+                        Думи, които да добавите в основния текст
+                        <button class="info-button" onclick="get_info('думи които липсват в нашият текст');">?</button>
+                    </h2>
+                    <div class="scrollable-content page-section-content">
+                        <table class="fullwidth">
+                            <thead>
+                                <tr>
+                                    <th style="width:50%;">Дума</th>
+                                    <th style="width:25%;">Повторения</th>
+                                    <th style="width:25%;">Процентно отношение</th>
+                                </tr>
+                                {% for obj in info['words']['difference comp & main'] %}
+                                <tr>
+                                    <td class="special">{{obj}}</td>
+                                    <td>{{info['words']['difference comp & main'][obj][0]}}</td>
+                                    <td>{{info['words']['difference comp & main'][obj][1]}}%</td>
+                                </tr>
+                                {% endfor %}
+                            </thead>
+                        </table>
+
+                    </div>
+                </div>
+                <button style="border-radius:5px; width: 15rem; height: 1.6rem; opacity: 0.75;" onclick="copy('special')">Копиране</button>
+                <br>
+                <br>
+                <!-- unique words of competitors' texts [end] -->
+                <!-- extra information [start] -->
+                <div class='extra info'>
+                    <!-- sem core of main text [start] -->
+                    <h2 class="page-section-heading">
+                        Семантично ядро на основния текст
+                        <button class="info-button" onclick="get_info('думи които липсват в нашият текст');">?</button>
+                    </h2>
+                    <div class="scrollable-content page-section-content">
+                        <table class="fullwidth">
+                            <thead>
+                            <tr>
+                                <th>Дума</th>
+                                <th>Форми</th>
+                                <th>Повторения</th>
+                                <th>Процентно отношение</th>
+                            </tr>
+                            {% for obj in info['words']['main words']['sem core'] %}
+                            <tr>
+                                <td>{{obj}}</td>
+                                <td>
+                                    {% for word in info['words']['main words']['sem core'][obj][0] %}
+                                    {{word}}
+                                    {% endfor %}
+                                </td>
+                                <td>{{info['words']['main words']['sem core'][obj][1]}}</td>
+                                <td>{{info['words']['main words']['sem core'][obj][2]}}%</td>
+                            </tr>
+                            {% endfor %}
+                            </thead>
+                        </table>
+                    </div>
+                    <!-- sem core of main text [end] -->
+                    <!-- unknowm words of main text [start] -->
+                    <h2 class="page-section-heading">
+                        Неразпознати думи от основния текст
+                        <button class="info-button" onclick="get_info('думи които липсват в нашият текст');">?</button>
+                    </h2>
+                    <div class="scrollable-content page-section-content">
+                        <table class="fullwidth">
+                            <thead>
+                            <tr>
+                                <th>Дума</th>
+                                <th>Повторения</th>
+                                <th>Процентно отношение</th>
+                            </tr>
+                            {% for obj in info['words']['main words']['incorrect words'] %}
+                                <tr>
+                                    <td>{{obj}}</td>
+                                    <td>{{info['words']['main words']['incorrect words'][obj][1]}}</td>
+                                    <td>{{info['words']['main words']['incorrect words'][obj][2]}}%</td>
+                                </tr>
+                                {% endfor %}
+                            </thead>
+                        </table>
+                    </div>
+                    <!-- unknowm words of main text [end] -->
+
+                    <!-- competitors texts info  -->
+                    <!-- sem core of competitors texts [start] -->
+
+                    <h2 class="page-section-heading">
+                        Семантично ядро на текста на конкурента
+                        <button class="info-button" onclick="get_info('думи които липсват в нашият текст');">?</button>
+                    </h2>
+                    <div class="scrollable-content page-section-content">
+                        <table class="fullwidth">
+                            <thead>
+                            <tr>
+                                <th>Дума</th>
+                                <th>Форми</th>
+                                <th>Повторения</th>
+                                <th>Процентно отношение</th>
+                            </tr>
+                            {% for obj in info['words']['comp words']['sem core'] %}
+                            <tr>
+                                <td>{{obj}}</td>
+                                <td>
+                                    {% for word in info['words']['comp words']['sem core'][obj][0] %}
+                                    {{word}}
+                                    {% endfor %}
+                                </td>
+                                <td>{{info['words']['comp words']['sem core'][obj][1]}}</td>
+                                <td>{{info['words']['comp words']['sem core'][obj][2]}}%</td>
+                            </tr>
+                            {% endfor %}
+                            </thead>
+                        </table>
+                    </div>
+                    <!-- sem core of competitors texts [end] -->
+                    <!-- unknowm words of competitors texts [start] -->
+
+                    <h2 class="page-section-heading">
+                        Неразпознати думи от текста на конкурента
+                        <button class="info-button" onclick="get_info('думи които липсват в нашият текст');">?</button>
+                    </h2>
+                    <div class="scrollable-content page-section-content">
+                        <table class="fullwidth">
+                            <thead>
+                            <tr>
+                                <th>Дума</th>
+                                <th>Повторения</th>
+                                <th>Процентно отношение</th>
+                            </tr>
+                            {% for obj in info['words']['comp words']['incorrect words'] %}
+                            <tr>
+                                <td>{{obj}}</td>
+                                <td>{{info['words']['comp words']['incorrect words'][obj][1]}}</td>
+                                <td>{{info['words']['comp words']['incorrect words'][obj][2]}}%</td>
+                            </tr>
+                            {% endfor %}
+                            </thead>
+                        </table>
+                    </div>
+                    <!-- unknowm words of competitors texts [end] -->
+
+                    <h2 class="page-section-heading">
+                        Думи, които ги има в основния текст и ги няма в текста на конкурента
+                        <button class="info-button" onclick="get_info('думи които липсват в нашият текст');">?</button>
+                    </h2>
+                    <div class="scrollable-content page-section-content">
+                        <table class="fullwidth">
+                            <thead>
+                                <tr>
+                                    <th style="width:50%;">Дума</th>
+                                    <th style="width:25%;">Повторения</th>
+                                    <th style="width:25%;">Процентно отношение</th>
+                                </tr>
+                                {% for obj in info['words']['difference main & comp'] %}
+                                <tr>
+                                    <td>{{obj}}</td>
+                                    <td>{{info['words']['difference main & comp'][obj][0]}}</td>
+                                    <td>{{info['words']['difference main & comp'][obj][1]}}%</td>
+                                </tr>
+                                {% endfor %}
+                            </thead>
+                        </table>
+                    </div>
+
+                    <h2 class="page-section-heading">
+                        Общи думи
+                        <button class="info-button" onclick="get_info('думи които липсват в нашият текст');">?</button>
+                    </h2>
+                    <div class="scrollable-content page-section-content">
+                        <table class="fullwidth">
+                            <thead>
+                                <tr>
+                                    <th>Дума</th>
+                                    <th>Повторения</th>
+                                    <th>Процентно отношение</th>
+                                    <th>Повторения</th>
+                                    <th>Процентно отношение</th>
+
+                                </tr>
+                                {% for obj in info['words']['common words'] %}
+                                <tr>
+                                    <td>{{obj}}</td>
+                                    <td>{{info['words']['common words'][obj][0]}}</td>
+                                    <td>{{info['words']['common words'][obj][1]}}%</td>
+                                    <td>{{info['words']['common words'][obj][2]}}</td>
+                                    <td>{{info['words']['common words'][obj][3]}}%</td>
+                                </tr>
+                                {% endfor %}
+                            </thead>
+                        </table>
+                    </div>   
+                    <h4>Основният текст</h4>
+                    <p>{{main}}</p>
+                    <br>
+                    <h4>Вторият текст</h4>
+                    <p>{{comp}}</p>
+                    <!--end Page content-->
+                </div>
+            </div>
+            <!-- FOOTER -->
+            <div class="footer">
+                <p>&copy; <a href="http://netpeak.bg/">Netpeak Bulgaria</a> 2014</p>
+            </div>
+    </body>
+    <script>
+        function get_info(text){
+            alert(text);
+        }
+        function copy(class_name){
+            
+            var text = '';
+            var rows = document.getElementsByClassName(class_name);
+
+            for(let i =0; i<rows.length; i++){
+                text += rows[i].innerHTML + ', ';
+            }
+
+            if (window.clipboardData && window.clipboardData.setData) {
+                // Internet Explorer-specific code path to prevent textarea being shown while dialog is visible.
+                return window.clipboardData.setData("Text", text);
+            }
+            else{
+                return prompt("Copy to clipboard: Ctrl+C, Enter", text);
+            }
+        }
+    </script>
+</html>
