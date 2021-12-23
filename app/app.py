@@ -22,6 +22,8 @@ def get_info(text):
     number_of_words =  get_number_of_words(list_of_words)
     words_info = get_words_info(list_of_words)
 
+    number_of_incorrect = len(words_info['incorrect words'])
+
     data ={
         'statistics':{
             'count of symbols':symbols_of_text[0],
@@ -32,7 +34,8 @@ def get_info(text):
             'number of paragraphs': number_of_paragraphs,
             'symbols in paragraphs': paragraphs_info[0],
             'words in paragraphs': paragraphs_info[1],
-            'number of words': number_of_words
+            'number of words': number_of_words,
+            'number of unknown': number_of_incorrect 
             },
         'words': words_info 
     }
