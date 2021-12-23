@@ -70,6 +70,10 @@ def get_words_info(words):
     text = ''
     words = [x.lower() for x in words]
 
+    headers = {
+        'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+        }
+
     arr = [words[d:d+100] for d in range(0, len(words), 100)]
     for row in arr:
 
@@ -81,7 +85,7 @@ def get_words_info(words):
             resp = session.get(url)
 
         try:
-            answers = resp.html.xpath('//div[@class="result"]/pre/text()')
+            answers = resp.html.xpath('//div[@class="result"]/pre/text()', headers=headers)
         except Exception as e:
             print (f'[ERROR] {e}')
             return False
