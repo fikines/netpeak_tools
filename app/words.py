@@ -1,3 +1,4 @@
+from nltk import data
 from requests_html import HTMLSession
 
 
@@ -82,10 +83,10 @@ def get_words_info(words):
         url = f'http://slovored.com/search/grammar/{line}'
 
         with HTMLSession() as session:
-            resp = session.get(url)
+            resp = session.get(url, headers= headers)
 
         try:
-            answers = resp.html.xpath('//div[@class="result"]/pre/text()', headers=headers)
+            answers = resp.html.xpath('//div[@class="result"]/pre/text()')
         except Exception as e:
             print (f'[ERROR] {e}')
             return False
