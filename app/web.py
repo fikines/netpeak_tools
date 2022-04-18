@@ -8,23 +8,7 @@ DATA = dict()
 
 async def handle_main(request):
     context = {'data' : None}
-    response = render_template('login.html', request, context)
-    return response
-
-
-async def login(request):
-
-    data = await request.post()
-    login = data['text']
-    password = data['password']
-
-    context = {'data' : None}
-
-    if login == 'finik' and password == 'finik':
-        response = render_template('index.html', request, context)
-    else:
-        response = render_template('login.html', request, context)
-
+    response = render_template('index.html', request, context)
     return response
 
 
@@ -54,8 +38,6 @@ app = web.Application()
 
 app.add_routes([web.get('/', handle_main),
                 web.post('/statistics', start_analysis),
-                web.get('/tool', get_tool),
-                web.post('/login', login),
                 web.static('/static', 'templates'),])
 
 
