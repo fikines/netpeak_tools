@@ -2,6 +2,7 @@ from aiohttp import web
 from aiohttp_jinja2 import setup, render_template
 import jinja2
 from app import collecting
+from flask import send_file
 
 DATA = dict()
 
@@ -44,10 +45,16 @@ async def start_analysis(request):
     return response
 
 
+def get_tool():
+    path = "test.txt"
+    return send_file(path, as_attachment=True)
+
+
 app = web.Application()
 
 app.add_routes([web.get('/', handle_main),
                 web.post('/statistics', start_analysis),
+                web.get('/tool', get_tool),
                 web.post('/login', login),
                 web.static('/static', 'templates'),])
 
