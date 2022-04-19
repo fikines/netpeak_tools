@@ -1,14 +1,19 @@
 from aiohttp import web
 from aiohttp_jinja2 import setup, render_template
 import jinja2
-from app import collecting
-from flask import send_file
+from text_analyzer.app import collecting
 
 DATA = dict()
 
 async def handle_main(request):
     context = {'data' : None}
     response = render_template('index.html', request, context)
+    return response
+
+
+async def open_text_analyzer(request):
+    context = {'data' : None}
+    response = render_template('text_analyzer.html', request, context)
     return response
 
 
@@ -25,19 +30,15 @@ async def start_analysis(request):
         'comp' : result[1],
         'info' : result[2],}
 
-    response = render_template('answer.html', request, context)
+    response = render_template('text_analyzer_answer.html', request, context)
     return response
-
-
-def get_tool():
-    path = "test.txt"
-    return send_file(path, as_attachment=True)
 
 
 app = web.Application()
 
 app.add_routes([web.get('/', handle_main),
-                web.post('/statistics', start_analysis),
+                web.get('/text_analyzer', open_text_analyzer),
+                web.post('/text_analyzer/statistics', start_analysis),
                 web.static('/static', 'templates'),])
 
 

@@ -5,36 +5,78 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="finik_netpeak" />
-        <title>Text Analyzer</title>
+        <title>Netpeak Tools</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="/static/css/styles.css" rel="stylesheet" />
+        <link href="static/css/styles.css" rel="stylesheet" />
+        <style>
+            * {
+              box-sizing: border-box;
+            }
+            
+            /* Create two equal columns that floats next to each other */
+            .column {
+              float: left;
+              width: 40%;
+              padding: 10px;
+              /* height: 300px; Should be removed. Only for demonstration */
+              margin-left: 5%;
+              margin-right: 5%;
+              min-height: 360px;
+              
+            }
+            
+            /* Clear floats after the columns */
+            .row:after {
+              content: "";
+              display: table;
+              clear: both;
+            }
+
+            .card-box {
+                background-clip: border-box;
+                border: 1px solid rgba(0,0,0,.125);
+                border-radius: .25rem;
+                padding: 15px;
+                min-height: 300px;
+            }
+
+            .img-responsive { 
+                max-height: 200px;
+            }
+        </style>
     </head>
     <body>
         <div class="wrapper">
             <!--Navbar-->
             <div class="header" onclick="window.location.href='/'">
                 <span class="header-title">
-                  Семантичен анализ
+                  Netpeak Tools
                 </span>
             </div>
             <!-- Page content-->
-            <form action="/statistics" method="post">
-                <div class="content">
-                    <h2>Основният текст</h2>
-                    <textarea name="main_text" id="main_text" rows="15" placeholder="Текст" style="width: 100%;"></textarea>
-                    <br><br>
-                    <h2>Текст на конкурента</h2>
-                    <textarea name="comp_text" id="comp_text" rows="15" placeholder="Текст" style="width: 100%;"></textarea>
-                    <br>
-                    <br>
-                    <input type="submit" value="Анализиране" style="width: 15%; height: 3rem;">
+            <div class="content">
+                <div class="row">
+                    <div class="column">
+                        <div class="card-box" >
+                            <a href="/text_analyzer"><img class="img-responsive" src="static/assets/text_analyzer.png" style="width:100%"></a>
+                            <h3><a href="/text_analyzer">Text Analyzer</a></h3>
+                            <p>The tool compares texts and returns a report on their similarities and differences</p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="card-box">
+                            <a href="#"><img class="img-responsive" src="static/assets/shiny_top100.png" style="width:100%"></a>
+                            <h3><a href="#">Indexing API</a></h3>
+                            <p>Makes a request to GSC to reindex up to 200 pages</p>
+                        </div>
+                    </div>
                 </div>
-            </form>
-            <!-- FOOTER -->
-            <div class="footer">
-                <p>&copy; <a href="http://netpeak.bg/">Netpeak Bulgaria</a> 2014</p>
+                <!-- FOOTER -->
+                <div class="footer">
+                    <p>&copy; <a href="http://netpeak.bg/">Netpeak Bulgaria</a> 2014</p>
+                </div>
             </div>
         </div>
     </body>

@@ -1,9 +1,9 @@
-from utilities import clean_text
-from symbols import get_number_of_symbols
-from words import get_words, get_words_info, get_number_of_words
-from sentence import get_count_of_sentences,get_sentences, info_sentences
-from paragraph import get_info_paragraphs, get_paragraphs, get_count_of_paragraphs
-from compare import words_difference,words_common
+from .symbols import get_number_of_symbols
+from .words import get_words, get_words_info, get_number_of_words
+from .sentence import get_count_of_sentences,get_sentences, info_sentences
+from .paragraph import get_info_paragraphs, get_paragraphs, get_count_of_paragraphs
+from .compare import words_difference,words_common
+from .utilities import clean_text
 
 
 def get_info(text):

@@ -1,4 +1,4 @@
-from utilities import clean_text
+from .utilities import clean_text
 from string import punctuation
 import nltk
 
