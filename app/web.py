@@ -2,6 +2,8 @@ from aiohttp import web
 from aiohttp_jinja2 import setup, render_template
 import jinja2
 from text_analyzer.app import collecting
+import scripts.indexing_api as Index_API
+
 
 DATA = dict()
 
@@ -34,11 +36,19 @@ async def start_analysis(request):
     return response
 
 
+async def start_indexing(request):
+
+    data = await request.post()
+    links = data['links']
+    Index_API.main(links)
+
+
 app = web.Application()
 
 app.add_routes([web.get('/', handle_main),
                 web.get('/text_analyzer', open_text_analyzer),
                 web.post('/text_analyzer/statistics', start_analysis),
+                web.post('/scripts/indexing_api', start_indexing),
                 web.static('/static', 'templates'),])
 
 

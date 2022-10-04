@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="finik_netpeak" />
+        <title>Netpeak Tools</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
+        <!-- <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" /> -->
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="static/css/styles.css" rel="stylesheet" />
+        <!-- <link href="static/css/styles.css" rel="stylesheet" /> -->
+        <style>
+            P {
+                line-height: 200%;
+            }
+            h1,h2 {
+                line-height: 150%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <!--Navbar-->
+            <div class="header" onclick="window.location.href='/'">
+                <span class="header-title">
+                  Netpeak Tools
+                </span>
+            </div>
+            <!-- Page content-->
+            <div class="content">
+                <h1>Indexing API</h1>
+                    
+                <h2>Instruction</h2>
+                <p>1. Give "owner" access to GSC to:  <b>netpeak-scripts@netpeak-scripts.iam.gserviceaccount.com</b></p>
+                <p>2. Add a list with links, table format is .tsv, number of links per day up to 200</p>
+                <form action="/answer" enctype="multipart/form-data" method="post" style=" text-align: center;">
+                    <input style="line-height: 150%" type="file" name="file">
+                <br>
+                <br>
+                <input  type="submit" value="Анализиране" style="width: 15%; height: 3rem;">
+               </form> 
+                
+            </div>
+            <!-- FOOTER -->
+            <div class="footer"> <p>&copy; <a href="http://netpeak.bg/">Netpeak Bulgaria</a> 2014</p> </div>
+            <!-- END FOOTER -->
+        </div>
+    </body>
+</html>
