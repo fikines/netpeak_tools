@@ -3,6 +3,7 @@ from aiohttp_jinja2 import setup, render_template
 import jinja2
 from text_analyzer.app import collecting
 import scripts.indexing_api as Index_API
+import json
 
 
 DATA = dict()
@@ -38,9 +39,17 @@ async def start_analysis(request):
 
 async def start_indexing(request):
 
-    data = await request.post()
-    links = data['links']
-    Index_API.main(links)
+    post_data = await request.post()
+    data = {}
+    for k in set(post_data.keys()):
+        data[k] = post_data.getall(k)
+    resp = Index_API.main(data['links'])
+    if resp == 0:
+        response_obj = { 'status' : 'success' }
+    else:
+        response_obj = { 'status' : 'ERROR' }
+
+    return web.Response(text=json.dumps(response_obj))
 
 
 app = web.Application()
@@ -49,10 +58,10 @@ app.add_routes([web.get('/', handle_main),
                 web.get('/text_analyzer', open_text_analyzer),
                 web.post('/text_analyzer/statistics', start_analysis),
                 web.post('/scripts/indexing_api', start_indexing),
-                web.static('/static', 'templates'),])
+                web.static('/static', 'tools/app/templates'),])
 
 
-setup(app, loader=jinja2.FileSystemLoader('templates'))
+setup(app, loader=jinja2.FileSystemLoader('tools/app/templates'))
 
 
 if __name__ == '__main__':
