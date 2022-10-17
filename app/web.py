@@ -1,3 +1,4 @@
+from pprint import pprint
 from aiohttp import web
 from aiohttp_jinja2 import setup, render_template
 import jinja2
@@ -41,9 +42,15 @@ async def start_indexing(request):
 
     post_data = await request.post()
     data = {}
-    for k in set(post_data.keys()):
-        data[k] = post_data.getall(k)
-    resp = Index_API.main(data['links'])
+
+    if len(post_data) == 1:
+        for k in set(post_data.keys()):
+            data = json.loads(k, strict=False)
+    else:
+        for k in set(post_data.keys()):
+            data[k] = post_data.getall(k)
+
+    resp = Index_API.main(data['links'], data['token'][0])
     if resp == 0:
         response_obj = { 'status' : 'success' }
     else:
